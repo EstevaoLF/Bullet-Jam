@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
+
 public class SimpleMove : MonoBehaviour
 {
     Animator anim;
@@ -11,7 +11,8 @@ public class SimpleMove : MonoBehaviour
     [SerializeField]
     float faceMoveDirectionSpeed;
 
-    CharacterController controller;
+    Rigidbody rb;
+    public LayerMask ground;
 
     Camera cam;
     Vector3 direction;
@@ -19,7 +20,7 @@ public class SimpleMove : MonoBehaviour
     {
         cam = Camera.main;
         anim = GetComponentInChildren<Animator>();
-        controller = GetComponent<CharacterController>();
+        rb = GetComponentInChildren<Rigidbody>();
     }
 
     void Update()
@@ -49,7 +50,7 @@ public class SimpleMove : MonoBehaviour
         if (direction.magnitude != 0)
         {
             FaceMoveDirection();
-            controller.SimpleMove(direction.normalized * speed);
+            rb.MovePosition(transform.position + direction.normalized * speed * Time.deltaTime);
         }
 
     }
@@ -60,6 +61,14 @@ public class SimpleMove : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, faceMoveDirectionSpeed * Time.deltaTime);
     }
 
+    private void FaceMoveDirectionWhenCasting()
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+        Physics.Raycast(ray, out hitInfo, Mathf.Infinity, ground);
+        Vector3 mousePos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 2, Input.mousePosition.z));
+        transform.LookAt(hitInfo.point);
+    }
     void AnimationControl()
     {
         if (Mathf.Abs(direction.magnitude) > 0)

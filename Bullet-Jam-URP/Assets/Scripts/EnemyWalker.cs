@@ -29,8 +29,8 @@ public class EnemyWalker : Enemy
     Vector3 GetNextMovePosition()
     {
         movePosition = new Vector3();
-        movePosition.x = Random.Range(0, terrainCollider.bounds.size.x);
-        movePosition.z = Random.Range(0, terrainCollider.bounds.size.z);
+        movePosition.x = Random.Range(-25, 25);
+        movePosition.z = Random.Range(-25, 25);
         movePosition.y = transform.position.y;
         return movePosition;
     }

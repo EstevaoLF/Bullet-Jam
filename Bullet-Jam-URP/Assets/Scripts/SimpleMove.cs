@@ -23,7 +23,7 @@ public class SimpleMove : MonoBehaviour
         rb = GetComponentInChildren<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         Move();

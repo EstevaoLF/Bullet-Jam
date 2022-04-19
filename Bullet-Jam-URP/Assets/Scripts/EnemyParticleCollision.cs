@@ -20,9 +20,10 @@ public class EnemyParticleCollision : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        //if (other.GetComponent<Enemy>()!= null)
-        //{
-        //    other.GetComponent<Enemy>().TakeDamage(damage);
-        //}       
+        Debug.Log("collided");
+        if (other.GetComponent<Player>() != null)
+        {
+            other.GetComponent<Player>().TakeDamage(damage);
+        }
     }
 }

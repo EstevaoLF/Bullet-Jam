@@ -25,7 +25,7 @@ public class PlayerParticleCollision : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log("collided with " + other.name);
+        Debug.Log("hit");
         if (other.GetComponent<Enemy>()!= null)
         {
             other.GetComponent<Enemy>().TakeDamage(damage);

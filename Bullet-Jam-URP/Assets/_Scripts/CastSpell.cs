@@ -51,7 +51,7 @@ public class CastSpell : MonoBehaviour
         {
             GameObject orb = Instantiate(frozenOrb, spawnPosition.position, transform.rotation);
             Vector3 direction = GetMousePosition() - transform.position;
-            orb.GetComponent<Rigidbody>().AddForce(direction.normalized * 500);
+            orb.GetComponent<Rigidbody>().AddForce(direction.normalized * 700);
             player.currentMana -= frozenOrbManaCost;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && player.currentMana >= fireBallManaCost)

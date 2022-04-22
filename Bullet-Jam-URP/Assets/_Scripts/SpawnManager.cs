@@ -31,6 +31,9 @@ public class SpawnManager : MonoBehaviour
 
     public float timeBetweenWaves;
     float countdownTime;
+
+    [SerializeField]
+    Transform player;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +76,10 @@ public class SpawnManager : MonoBehaviour
         int randomEnemy = Random.Range(0, _wave.enemyPrefab.Count);
 
         Instantiate(_wave.enemyPrefab[randomEnemy], spawnPosition[randomSpawnPoint].transform.position, Quaternion.identity);
+        if (_wave.enemyPrefab[randomEnemy].GetComponent<EnemyFollower>() != null)
+        {
+            _wave.enemyPrefab[randomEnemy].GetComponent<EnemyFollower>().player = player;
+        }
         ////This is for debug only, should be removed later
         //if (!GameManager.Instance.enemies.Contains(enemySpawned.GetComponent<ITakeDamage>()))
         //{

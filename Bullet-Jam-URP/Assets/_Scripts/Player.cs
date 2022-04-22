@@ -38,9 +38,4 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    internal void TakeDamage(object detonateDamage)
-    {
-        throw new NotImplementedException();
-    }
 }

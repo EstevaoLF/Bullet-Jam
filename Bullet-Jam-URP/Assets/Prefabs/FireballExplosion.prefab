@@ -4871,6 +4871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2655864189794810119}
+  - component: {fileID: -741143660087185691}
   m_Layer: 0
   m_Name: FireballExplosion
   m_TagString: Untagged
@@ -4895,6 +4896,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-741143660087185691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628184503787340320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b5ad8dfa64c0244b116c88c2aae928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2994120030807423006
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,11 +8,13 @@ public class Canon : MonoBehaviour
     GameObject ballPrefab;
     [SerializeField]
     ParticleSystem warming;
+    [SerializeField]
+    ParticleSystem detonate;
 
     [SerializeField]
     Transform firePoint;
     WaitForSeconds timeBetweenAttacks = new WaitForSeconds(1);
-    WaitForSeconds timeBeforeDetonate = new WaitForSeconds(5f);
+    WaitForSeconds timeBeforeDetonate = new WaitForSeconds(3f);
 
     Collider[] playerCollider = new Collider[1];
     [SerializeField]
@@ -20,10 +22,15 @@ public class Canon : MonoBehaviour
     [SerializeField]
     LayerMask whatIsPlayer;
 
+    [SerializeField]
+    float checkIfPlayerIsNearTime;
+    float countDown;
+
     private void Start()
     {
         warming.Stop();
-        StartCoroutine(StartDetonate());
+        detonate.Stop();
+        countDown = checkIfPlayerIsNearTime;
     }
 
     public void StartAttacking()
@@ -50,23 +57,28 @@ public class Canon : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Player"))
-    //    {
-    //        StartCoroutine(StartDetonate());
-    //    }
-    //}
-    IEnumerator StartDetonate()
-    {        
-        int player = Physics.OverlapSphereNonAlloc(transform.position, 10, playerCollider, whatIsPlayer);
-        if (player > 0)
+    private void Update()
+    {
+        countDown -= Time.deltaTime;
+        if (countDown <= 0)
         {
-            for (int i = 0; i < playerCollider.Length; i++)
+            countDown = checkIfPlayerIsNearTime;
+            if (Physics.CheckSphere(transform.position, 10f, whatIsPlayer))
             {
-                playerCollider[i].GetComponent<Player>().TakeDamage(detonateDamage);
+                StartCoroutine(StartDetonate());
             }
         }
+
+    }
+    IEnumerator StartDetonate()
+    {
+        detonate.Simulate(0, false, true);
+        detonate.Play();
         yield return timeBeforeDetonate;
+        int player = Physics.OverlapSphereNonAlloc(transform.position, 5, playerCollider, whatIsPlayer);
+        if (player > 0)
+        {
+            playerCollider[0].GetComponent<Player>().TakeDamage(detonateDamage);
+        }
     }
 }

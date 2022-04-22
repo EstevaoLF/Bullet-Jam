@@ -30,12 +30,10 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        currentHealth -= dmg;
+        currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
         OnEnemyHealthChanged?.Invoke(currentHealth, MaxHealth);
-        if (currentHealth > 0)
-        {
-            currentHealth -= dmg;
-        }
-        else
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }

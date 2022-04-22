@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyWalker : Enemy
 {
-    public Collider terrainCollider;
-    Vector3 movePosition = new Vector3();
+    Vector3 movePosition;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -29,8 +28,8 @@ public class EnemyWalker : Enemy
     Vector3 GetNextMovePosition()
     {
         movePosition = new Vector3();
-        movePosition.x = Random.Range(-25, 25);
-        movePosition.z = Random.Range(-25, 25);
+        movePosition.x = Random.Range(-24, 24);
+        movePosition.z = Random.Range(-24, 24);
         movePosition.y = transform.position.y;
         return movePosition;
     }

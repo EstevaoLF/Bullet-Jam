@@ -17,7 +17,7 @@ public class SimpleMove : MonoBehaviour
     Camera cam;
     Vector3 direction;
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     private void Start()
     {
         cam = Camera.main;

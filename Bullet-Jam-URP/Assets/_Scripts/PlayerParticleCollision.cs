@@ -8,7 +8,8 @@ public class PlayerParticleCollision : MonoBehaviour
     float damage = 10;
 
     ParticleSystem ps;
-    // Start is called before the first frame update
+    [SerializeField]
+    GameObject explosionPrefab;
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
@@ -25,9 +26,11 @@ public class PlayerParticleCollision : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+        
         if (other.GetComponent<Enemy>()!= null)
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
+            Instantiate(explosionPrefab, other.transform.position, transform.rotation);
         }       
     }
 }

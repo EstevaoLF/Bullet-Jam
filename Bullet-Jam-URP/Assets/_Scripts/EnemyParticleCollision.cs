@@ -6,23 +6,19 @@ public class EnemyParticleCollision : MonoBehaviour
 {
     [SerializeField]
     float damage = 10;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [SerializeField]
+    GameObject explosion;
     private void OnParticleCollision(GameObject other)
     {
         if (other.GetComponent<Player>() != null)
         {
             other.GetComponent<Player>().TakeDamage(damage);
+        }
+        if (explosion != null)
+        {
+            Vector3 position = other.GetComponent<Collider>().ClosestPoint(transform.position);
+            Instantiate(explosion, position, Quaternion.identity);
         }
     }
 }

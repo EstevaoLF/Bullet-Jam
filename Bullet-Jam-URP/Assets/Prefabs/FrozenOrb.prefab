@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  explosionPrefab: {fileID: 8258501923648195468, guid: ffed2570a2845b24cb313d5a678a044c, type: 3}
 --- !u!198 &2169576082309853867
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4867,6 +4868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  explosionPrefab: {fileID: 8258501923648195468, guid: ffed2570a2845b24cb313d5a678a044c, type: 3}
 --- !u!198 &2169576083451373076
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5119,8 +5121,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2.5
-      minScalar: 2
+      scalar: 8
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:

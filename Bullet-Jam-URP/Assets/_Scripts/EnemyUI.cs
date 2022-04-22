@@ -57,8 +57,6 @@ public class EnemyUI : MonoBehaviour
 
             ui = Instantiate(healthBarPrefab, uiCanvas.transform).transform;
 
-            //ui.transform.SetParent(uiCanvas.transform, false);
-
             fill = ui.GetChild(0).GetComponent<Image>();
 
             currentFill = 1;

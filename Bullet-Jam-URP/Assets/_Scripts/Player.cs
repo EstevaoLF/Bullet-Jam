@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class Player : MonoBehaviour
     public float maxMana;
     public float currentMana;
     float manaRegen = 5;
+
+    public bool isShielded = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,13 +29,18 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        if (currentHealth > 0)
+        if (!isShielded)
         {
             currentHealth -= dmg;
         }
-        else
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    internal void TakeDamage(object detonateDamage)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -29,9 +29,7 @@ public class SimpleMove : MonoBehaviour
 
     void FixedUpdate()
     {
-
         Move();
-        //AnimationControl();
     }
 
     void Move()

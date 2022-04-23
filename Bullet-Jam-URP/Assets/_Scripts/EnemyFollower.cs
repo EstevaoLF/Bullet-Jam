@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class EnemyFollower : Enemy
 {
-    public Transform player;
+    public GameObject player;
     // Start is called before the first frame update
     public override void Start()
     {
-        base.Start();        
+        base.Start();
+        //if (player == null)
+        //{
+        //    player = GameObject.FindGameObjectWithTag("Player");
+        //}
     }
 
     // Update is called once per frame
@@ -16,7 +20,7 @@ public class EnemyFollower : Enemy
     {
         if (player != null)
         {
-            agent.SetDestination(player.position);
+            agent.SetDestination(player.transform.position);
         }
     }
 }

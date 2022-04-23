@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     float countdownTime;
 
     [SerializeField]
-    Transform player;
+    GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,7 +91,7 @@ public class SpawnManager : MonoBehaviour
         int randomEnemy = Random.Range(0, _wave.enemyPrefab.Count);
 
         Instantiate(_wave.enemyPrefab[randomEnemy], spawnPosition[randomSpawnPoint].transform.position, Quaternion.identity);
-        if (_wave.enemyPrefab[randomEnemy].GetComponent<EnemyFollower>() != null)
+        if (_wave.enemyPrefab[randomEnemy].GetComponent<EnemyFollower>())
         {
             _wave.enemyPrefab[randomEnemy].GetComponent<EnemyFollower>().player = player;
         }

@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     TMP_Text scoreTxt;
     public int playerScore;
 
+    [SerializeField]
+    TMP_Text leaderboardScoreTxt;
+    [SerializeField]
+    LeaderboardController leaderboard;
+
     Player player;
 
     [SerializeField]
@@ -31,6 +36,7 @@ public class GameManager : MonoBehaviour
     Button reduceDamageButton;
     [SerializeField]
     TMP_Text reduceDamageTxt;
+
     private void Awake()
     {
         if (Instance == null)
@@ -45,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         playerScore = 0;
         scoreTxt.text = playerScore.ToString();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -103,5 +110,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.1f;
         UpgradeCanvas.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        leaderboard.playerScore = playerScore;
+        leaderboardScoreTxt.text = $"Your score: {playerScore}";
+        leaderboard.ShowScores();
+        leaderboard.hasSubmitted = false;
     }
 }

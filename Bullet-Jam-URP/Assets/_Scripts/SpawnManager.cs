@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
     [HideInInspector]
     public int currentwave = 0;
 
-    bool isSpawning;
+    bool isSpawning, isWaiting;
 
     public float timeBetweenWaves;
     float countdownTime;
@@ -48,9 +48,16 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         Countdown();
-        if (!isSpawning && countdownTime <= 0 && currentwave <= waves.Length - 1)
+        Debug.Log(countdownTime);
+
+        if (!isSpawning && countdownTime <= 0 && currentwave <= waves.Length - 1 && !isWaiting)
         {
             StartCoroutine(SpawnWave(waves[currentwave]));
+        }
+        if (isWaiting && GameManager.Instance.enemiesAlive == 0)
+        {
+            isWaiting = false;
+            GameManager.Instance.WaveCompleted();
         }
     }
 
@@ -63,11 +70,20 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(_wave.timeBetweenEnemies);
         }
         isSpawning = false;
-        if (currentwave <= waves.Length - 1)
+        if (currentwave >= waves.Length - 1)
+        {            
+            currentwave = 0;
+            isWaiting = true;
+            yield break;
+        }
+        else
         {
             currentwave++;
         }
         countdownTime = timeBetweenWaves;
+        Debug.Log(currentwave + " currentwave");
+        Debug.Log(waves.Length - 1 + " waves");
+
     }
 
     void SpawnEnemy(Wave _wave)
@@ -80,11 +96,6 @@ public class SpawnManager : MonoBehaviour
         {
             _wave.enemyPrefab[randomEnemy].GetComponent<EnemyFollower>().player = player;
         }
-        ////This is for debug only, should be removed later
-        //if (!GameManager.Instance.enemies.Contains(enemySpawned.GetComponent<ITakeDamage>()))
-        //{
-        //    GameManager.Instance.enemies.Add(enemySpawned.GetComponent<ITakeDamage>());
-        //}
     }
 
     void Countdown()

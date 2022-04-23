@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float currentMana;
     float manaRegen = 5;
 
+    [HideInInspector]
     public bool isShielded = false;
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     {
         if (!isShielded)
         {
-            currentHealth -= dmg;
+            currentHealth -= dmg * GameManager.Instance.damageTakenModifier;
         }
         if (currentHealth <= 0)
         {

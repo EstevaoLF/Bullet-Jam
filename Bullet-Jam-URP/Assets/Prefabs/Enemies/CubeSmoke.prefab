@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  MaxHealth: 200
-  moveSpeed: 0
+  maxHealth: 200
+  moveSpeed: 8
   agent: {fileID: 0}
 --- !u!114 &1660006429940545201
 MonoBehaviour:

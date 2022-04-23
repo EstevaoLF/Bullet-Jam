@@ -50,15 +50,15 @@ public class MeteorSpawner : MonoBehaviour
 
     Vector3 GetSpawnPosition()
     {
-        position.x = Random.Range(-24, 24);
-        position.z = Random.Range(-24, 24);
+        position.x = Random.Range(-35, 35);
+        position.z = Random.Range(-35, 35);
         position.y = 0;
         return position;
     }
 
     IEnumerator FireMeteorOnPlayer()
     {        
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             Instantiate(meteorPrefab, playerPosition, Quaternion.identity);
             yield return playerSeconds;

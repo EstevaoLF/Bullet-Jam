@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  explosion: {fileID: 0}
 --- !u!198 &7846472579084312849
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4962,8 +4963,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  MaxHealth: 200
-  moveSpeed: 0
+  maxHealth: 200
+  moveSpeed: 8
   agent: {fileID: 0}
 --- !u!114 &7846472579358403677
 MonoBehaviour:

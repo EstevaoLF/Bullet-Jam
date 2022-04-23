@@ -29,7 +29,7 @@ public class PlayerParticleCollision : MonoBehaviour
         
         if (other.GetComponent<Enemy>()!= null)
         {
-            other.GetComponent<Enemy>().TakeDamage(damage);
+            other.GetComponent<Enemy>().TakeDamage(damage * GameManager.Instance.damageModifier);
             Instantiate(explosionPrefab, other.transform.position, transform.rotation);
         }       
     }

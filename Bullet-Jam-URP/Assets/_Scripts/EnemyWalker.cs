@@ -28,8 +28,8 @@ public class EnemyWalker : Enemy
     Vector3 GetNextMovePosition()
     {
         movePosition = new Vector3();
-        movePosition.x = Random.Range(-24, 24);
-        movePosition.z = Random.Range(-24, 24);
+        movePosition.x = Random.Range(-35, 35);
+        movePosition.z = Random.Range(-35, 35);
         movePosition.y = transform.position.y;
         return movePosition;
     }

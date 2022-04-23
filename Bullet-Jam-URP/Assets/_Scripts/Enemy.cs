@@ -8,7 +8,7 @@ using System;
 public abstract class Enemy : MonoBehaviour
 {
     public float currentHealth;
-    public float MaxHealth;
+    public float maxHealth;
 
     public float moveSpeed;
     [HideInInspector]
@@ -19,7 +19,10 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        currentHealth = MaxHealth;
+        agent.speed *= GameManager.Instance.difficultyModifier;
+        maxHealth *= GameManager.Instance.difficultyModifier;
+        currentHealth = maxHealth;
+        GameManager.Instance.enemiesAlive++;
     }
 
     // Update is called once per frame
@@ -31,11 +34,17 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHealth -= dmg;
-        currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
-        OnEnemyHealthChanged?.Invoke(currentHealth, MaxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        OnEnemyHealthChanged?.Invoke(currentHealth, maxHealth);
         if (currentHealth <= 0)
         {
+            GameManager.Instance.IncreaseScore((int)(10 * GameManager.Instance.difficultyModifier));
             Destroy(gameObject);
         }
+    }
+
+    private void OnDisable()
+    {
+            GameManager.Instance.enemiesAlive--;
     }
 }

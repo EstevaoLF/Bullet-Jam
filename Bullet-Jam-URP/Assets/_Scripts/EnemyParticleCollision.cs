@@ -13,7 +13,7 @@ public class EnemyParticleCollision : MonoBehaviour
     {
         if (other.GetComponent<Player>() != null)
         {
-            other.GetComponent<Player>().TakeDamage(damage);
+            other.GetComponent<Player>().TakeDamage(damage * GameManager.Instance.difficultyModifier);
         }
         if (explosion != null)
         {

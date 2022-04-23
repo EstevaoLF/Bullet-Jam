@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904169279394058
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4873,6 +4874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904169934222777
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9700,6 +9702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904169993742332
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14527,6 +14530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904170142453667
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -19354,6 +19358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904170458379356
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -24181,6 +24186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904170493642988
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -29008,6 +29014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904170529208196
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -33835,6 +33842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  explosion: {fileID: 0}
 --- !u!198 &4328904170621162463
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -38736,8 +38744,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  MaxHealth: 200
-  moveSpeed: 50
+  maxHealth: 200
+  moveSpeed: 40
   agent: {fileID: 0}
 --- !u!195 &4328904171208003035
 NavMeshAgent:

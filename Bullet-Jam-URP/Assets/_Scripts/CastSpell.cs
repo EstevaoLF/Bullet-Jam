@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CastSpell : MonoBehaviour
 {
     [SerializeField]
-    GameObject frozenOrb;
+    GameObject frozenOrb, fireBall;
+
     [SerializeField]
-    GameObject fireBall;
-    [SerializeField]
-    ParticleSystem shieldPs;
-    [SerializeField]
-    ParticleSystem teleportPs;
+    ParticleSystem shieldPs, teleportPs;
+
 
     [SerializeField]
     Transform spawnPosition;
+
+    [SerializeField]
+    Image HealthPotImg, ManaPotImg;
+    bool isHealthOnCooldown, isManaOnCooldown;
+    float potionCooldown = 2.5f;
 
     Player player;
     SimpleMove move;
@@ -23,9 +27,10 @@ public class CastSpell : MonoBehaviour
     public LayerMask ground;
 
     float frozenOrbManaCost = 50;
-    float fireBallManaCost = 10;
-    float shieldManaCost = 100;
-    float teleportManaCost = 50;
+    float fireBallManaCost = 20;
+    float shieldManaCost = 75;
+    float teleportManaCost = 75;
+
     WaitForSeconds shieldDuration = new WaitForSeconds(3);    
     
     void Start()
@@ -45,35 +50,59 @@ public class CastSpell : MonoBehaviour
             teleportPs.Play();
             move.agent.SetDestination(destination);
             transform.position = destination;
-            player.currentMana -= teleportManaCost;
+            player.currentMana -= teleportManaCost * GameManager.Instance.manaModifier;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1) && player.currentMana >= frozenOrbManaCost)
         {
             GameObject orb = Instantiate(frozenOrb, spawnPosition.position, transform.rotation);
             Vector3 direction = GetMousePosition() - transform.position;
-            orb.GetComponent<Rigidbody>().AddForce(direction.normalized * 700);
-            player.currentMana -= frozenOrbManaCost;
+            orb.GetComponent<Rigidbody>().AddForce(direction.normalized * 1000);
+            player.currentMana -= frozenOrbManaCost * GameManager.Instance.manaModifier;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && player.currentMana >= fireBallManaCost)
         {
             GameObject ball = Instantiate(fireBall, spawnPosition.position, transform.rotation);
             Vector3 direction = GetMousePosition() - transform.position;
             ball.GetComponent<Rigidbody>().velocity = (direction.normalized * 50);
-            player.currentMana -= fireBallManaCost;
+            player.currentMana -= fireBallManaCost * GameManager.Instance.manaModifier;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && player.currentMana >= shieldManaCost && !shieldPs.isPlaying)
         {
             StartCoroutine(Shield());
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !isHealthOnCooldown)
         {
+            isHealthOnCooldown = true;
             player.currentHealth += 150;
             player.currentHealth = Mathf.Clamp(player.currentHealth, 0, player.maxHealth);
+            HealthPotImg.enabled = true;
+            HealthPotImg.fillAmount = 1;
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && !isManaOnCooldown)
         {
+            isManaOnCooldown = true;
             player.currentMana += 150;
             player.currentMana = Mathf.Clamp(player.currentMana, 0, player.maxMana);
+            ManaPotImg.enabled = true;
+            ManaPotImg.fillAmount = 1;
+        }
+
+        if (isHealthOnCooldown)
+        {
+            HealthPotImg.fillAmount -= Time.deltaTime / potionCooldown;
+            if (HealthPotImg.fillAmount <= 0)
+            {
+                isHealthOnCooldown = false;
+            }
+        }
+
+        if (isManaOnCooldown)
+        {
+            ManaPotImg.fillAmount -= Time.deltaTime / potionCooldown;
+            if (ManaPotImg.fillAmount <= 0)
+            {
+                isManaOnCooldown = false;
+            }
         }
     }
 
@@ -95,7 +124,7 @@ public class CastSpell : MonoBehaviour
     {
         shieldPs.gameObject.SetActive(true);
         player.isShielded = true;
-        player.currentMana -= shieldManaCost;
+        player.currentMana -= shieldManaCost * GameManager.Instance.manaModifier;
         yield return shieldDuration;
         shieldPs.gameObject.SetActive(false);
         player.isShielded = false;

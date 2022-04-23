@@ -78,7 +78,7 @@ public class Canon : MonoBehaviour
         int player = Physics.OverlapSphereNonAlloc(transform.position, 5, playerCollider, whatIsPlayer);
         if (player > 0)
         {
-            playerCollider[0].GetComponent<Player>().TakeDamage(detonateDamage);
+            playerCollider[0].GetComponent<Player>().TakeDamage(detonateDamage * GameManager.Instance.difficultyModifier);
         }
     }
 }

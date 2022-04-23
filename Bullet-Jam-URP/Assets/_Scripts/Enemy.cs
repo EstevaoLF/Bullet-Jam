@@ -38,13 +38,13 @@ public abstract class Enemy : MonoBehaviour
         OnEnemyHealthChanged?.Invoke(currentHealth, maxHealth);
         if (currentHealth <= 0)
         {
-            GameManager.Instance.IncreaseScore((int)(10 * GameManager.Instance.difficultyModifier));
             Destroy(gameObject);
         }
     }
 
     private void OnDisable()
     {
-            GameManager.Instance.enemiesAlive--;
+        GameManager.Instance.enemiesAlive--;
+        GameManager.Instance.IncreaseScore((int)(10 * GameManager.Instance.difficultyModifier));
     }
 }

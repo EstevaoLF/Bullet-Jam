@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour
     public int enemiesAlive;
 
     public static GameManager Instance;
+
+    [SerializeField]
+    Button reduceDamageButton;
+    [SerializeField]
+    TMP_Text reduceDamageTxt;
     private void Awake()
     {
         if (Instance == null)
@@ -76,7 +82,8 @@ public class GameManager : MonoBehaviour
     public void ReduceDamageTaken()
     {
         damageTakenLvl++;
-        damageTakenModifier *= Mathf.Pow(0.9f, damageTakenLvl);
+        damageTakenModifier *= Mathf.Pow(0.95f, damageTakenLvl);
+        damageTakenModifier = Mathf.Clamp(damageTakenModifier, 0.05f, 1);
     }
 
     public void WaveCompleted()
@@ -84,16 +91,17 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         difficultyModifier += 0.15f;
         UpgradeCanvas.SetActive(true);
+        if (damageTakenModifier <= 0.5f)
+        {
+            reduceDamageButton.enabled = false;
+            reduceDamageTxt.text = "Reached maximum level";
+            reduceDamageTxt.color = Color.red;
+        }
     }
 
     public void UpgradeSelected()
     {
         Time.timeScale = 1.1f;
         UpgradeCanvas.SetActive(false);
-    }
-
-    void CheckIfClickOnGameObject()
-    {
-
     }
 }

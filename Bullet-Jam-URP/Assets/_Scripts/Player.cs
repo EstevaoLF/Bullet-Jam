@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         if (!isShielded)
         {
             currentHealth -= dmg * GameManager.Instance.damageTakenModifier;
+            Debug.Log(dmg * GameManager.Instance.damageTakenModifier + " dmg taken");
         }
         if (currentHealth <= 0)
         {

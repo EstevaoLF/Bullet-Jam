@@ -31,7 +31,7 @@ public class Fireball : MonoBehaviour
         {
             if (other.GetComponent<Player>() != null)
             {
-                other.GetComponent<Player>().TakeDamage(damage);
+                other.GetComponent<Player>().TakeDamage(damage * GameManager.Instance.difficultyModifier);
                 GameObject go = Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(go, 1f);
                 Destroy(gameObject);

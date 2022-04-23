@@ -16,9 +16,10 @@ public class CastSpell : MonoBehaviour
     Transform spawnPosition;
 
     [SerializeField]
-    Image HealthPotImg, ManaPotImg;
-    bool isHealthOnCooldown, isManaOnCooldown;
-    float potionCooldown = 2.5f;
+    Image HealthPotImg, ManaPotImg, FrozenOrbImg;
+    bool isHealthOnCooldown, isManaOnCooldown, isFrozenOrbOnCooldown;
+    float potionCooldown = 5f;
+    float frozenOrbCooldown = 1f;
 
     Player player;
     SimpleMove move;
@@ -52,12 +53,16 @@ public class CastSpell : MonoBehaviour
             transform.position = destination;
             player.currentMana -= teleportManaCost * GameManager.Instance.manaModifier;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1) && player.currentMana >= frozenOrbManaCost)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && player.currentMana >= frozenOrbManaCost && !isFrozenOrbOnCooldown)
         {
             GameObject orb = Instantiate(frozenOrb, spawnPosition.position, transform.rotation);
             Vector3 direction = GetMousePosition() - transform.position;
             orb.GetComponent<Rigidbody>().AddForce(direction.normalized * 1000);
             player.currentMana -= frozenOrbManaCost * GameManager.Instance.manaModifier;
+
+            isFrozenOrbOnCooldown = true;
+            FrozenOrbImg.enabled = true;
+            FrozenOrbImg.fillAmount = 1;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && player.currentMana >= fireBallManaCost)
         {
@@ -102,6 +107,14 @@ public class CastSpell : MonoBehaviour
             if (ManaPotImg.fillAmount <= 0)
             {
                 isManaOnCooldown = false;
+            }
+        }
+        if (isFrozenOrbOnCooldown)
+        {
+            FrozenOrbImg.fillAmount -= Time.deltaTime / frozenOrbCooldown;
+            if (FrozenOrbImg.fillAmount <= 0)
+            {
+                isFrozenOrbOnCooldown = false;
             }
         }
     }

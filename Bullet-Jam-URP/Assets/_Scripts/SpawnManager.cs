@@ -48,7 +48,6 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         Countdown();
-        Debug.Log(countdownTime);
 
         if (!isSpawning && countdownTime <= 0 && currentwave <= waves.Length - 1 && !isWaiting)
         {

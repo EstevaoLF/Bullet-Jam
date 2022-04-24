@@ -25,6 +25,7 @@ public class SimpleMove : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rb = GetComponentInChildren<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
     }
 
     void FixedUpdate()
@@ -41,7 +42,6 @@ public class SimpleMove : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, ground))
             {
                 agent.SetDestination(hitInfo.point);
-                agent.speed = speed;
                 anim.SetBool("Running", true);
             }
         }

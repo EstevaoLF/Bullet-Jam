@@ -237,7 +237,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.40614033, b: 1, a: 1}
+      maxColor: {r: 0, g: 0.6685519, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -299,8 +299,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
-      minScalar: 0.8
+      scalar: 0.2
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4021,7 +4021,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.99215686, g: 0.1666922, b: 0, a: 1}
+      maxColor: {r: 0.99215686, g: 0.025693769, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4842,8 +4842,8 @@ GameObject:
   - component: {fileID: 7846472579358403672}
   - component: {fileID: 7846472579358403673}
   - component: {fileID: 7846472579358403674}
-  - component: {fileID: 7846472579358403675}
   - component: {fileID: 7846472579358403677}
+  - component: {fileID: -6927174204561099013}
   m_Layer: 6
   m_Name: CubeShoot
   m_TagString: Untagged
@@ -4926,7 +4926,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &7846472579358403674
 NavMeshAgent:
@@ -4938,7 +4938,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -4950,22 +4950,6 @@ NavMeshAgent:
   m_BaseOffset: 0.49999997
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7846472579358403675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7846472579358403668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0757749e57388a04d8fefbfa20fb9f9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 200
-  moveSpeed: 8
-  agent: {fileID: 0}
 --- !u!114 &7846472579358403677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4981,3 +4965,20 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 3711665763568627090, guid: 9bb20a30705fe4f429425505eeb3b846, type: 3}
   cam: {fileID: 0}
   offset: {x: 0, y: 3, z: 0}
+--- !u!114 &-6927174204561099013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846472579358403668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d38744adfc2cd42af4459d92674b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 200
+  moveSpeed: 8
+  agent: {fileID: 0}
+  player: {fileID: 0}

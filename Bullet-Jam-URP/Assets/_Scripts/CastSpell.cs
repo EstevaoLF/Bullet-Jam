@@ -19,7 +19,7 @@ public class CastSpell : MonoBehaviour
     Image HealthPotImg, ManaPotImg, FrozenOrbImg;
     bool isHealthOnCooldown, isManaOnCooldown, isFrozenOrbOnCooldown;
     float potionCooldown = 5f;
-    float frozenOrbCooldown = 1f;
+    float frozenOrbCooldown = 0.5f;
 
     Player player;
     SimpleMove move;
@@ -28,9 +28,9 @@ public class CastSpell : MonoBehaviour
     public LayerMask ground;
 
     float frozenOrbManaCost = 50;
-    float fireBallManaCost = 20;
-    float shieldManaCost = 75;
-    float teleportManaCost = 75;
+    float fireBallManaCost = 15;
+    float shieldManaCost = 50;
+    float teleportManaCost = 25;
 
     WaitForSeconds shieldDuration = new WaitForSeconds(3);    
     
@@ -78,7 +78,7 @@ public class CastSpell : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && !isHealthOnCooldown)
         {
             isHealthOnCooldown = true;
-            player.currentHealth += 150;
+            player.currentHealth += player.maxHealth * 0.3f;
             player.currentHealth = Mathf.Clamp(player.currentHealth, 0, player.maxHealth);
             HealthPotImg.enabled = true;
             HealthPotImg.fillAmount = 1;
@@ -86,7 +86,7 @@ public class CastSpell : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && !isManaOnCooldown)
         {
             isManaOnCooldown = true;
-            player.currentMana += 150;
+            player.currentMana += player.maxMana * 0.4f;
             player.currentMana = Mathf.Clamp(player.currentMana, 0, player.maxMana);
             ManaPotImg.enabled = true;
             ManaPotImg.fillAmount = 1;

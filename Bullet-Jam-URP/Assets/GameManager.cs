@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -96,7 +95,7 @@ public class GameManager : MonoBehaviour
     public void WaveCompleted()
     {
         Time.timeScale = 0f;
-        difficultyModifier += 0.15f;
+        difficultyModifier += 0.1f;
         UpgradeCanvas.SetActive(true);
         if (damageTakenModifier <= 0.5f)
         {
@@ -119,5 +118,10 @@ public class GameManager : MonoBehaviour
         leaderboardScoreTxt.text = $"Your score: {playerScore}";
         leaderboard.ShowScores();
         leaderboard.hasSubmitted = false;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
     }
 }

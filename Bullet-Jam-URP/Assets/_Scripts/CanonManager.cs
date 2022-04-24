@@ -9,7 +9,7 @@ public class CanonManager : MonoBehaviour
     [SerializeField]
     List<Canon> usedCanons;
 
-    float timeBetweenCanons = 10;
+    float timeBetweenCanons = 4;
     float countDown;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class CanonManager : MonoBehaviour
     IEnumerator GetRandomCanons()
     {
         usedCanons = new List<Canon>(canons);
-        int randomCanon = Random.Range(4, 7);
+        int randomCanon = Random.Range(2, 4);
         for (int i = 0; i < randomCanon; i++)
         {
             int random = Random.Range(0, usedCanons.Count - 1);
@@ -40,6 +40,6 @@ public class CanonManager : MonoBehaviour
             usedCanons.Remove(usedCanons[random]);
             yield return new WaitForSeconds(2);
         }
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(4);
     }
 }

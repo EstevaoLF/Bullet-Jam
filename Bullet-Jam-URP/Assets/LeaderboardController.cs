@@ -13,7 +13,7 @@ public class LeaderboardController : MonoBehaviour
 
     [SerializeField]
     TMP_Text[] entries;
-    int maxScores = 5;
+    int maxScores = 10;
 
     public bool hasSubmitted;
     // Start is called before the first frame update
@@ -59,7 +59,7 @@ public class LeaderboardController : MonoBehaviour
                 LootLockerLeaderboardMember[] scores = response.items;
                 for (int i = 0; i < scores.Length; i++)
                 {
-                    entries[i].text = (scores[i].rank + " " + scores[i].member_id + ".   " + scores[i].score);
+                    entries[i].text = (scores[i].rank + ".   " + scores[i].member_id + ":   " + scores[i].score);
                 }
             }
             else

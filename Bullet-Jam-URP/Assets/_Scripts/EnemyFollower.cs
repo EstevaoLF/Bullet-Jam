@@ -22,5 +22,9 @@ public class EnemyFollower : Enemy
         {
             agent.SetDestination(player.transform.position);
         }
+        else
+        {
+            player = FindObjectOfType<Player>().gameObject;
+        }
     }
 }

@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed *= GameManager.Instance.difficultyModifier;
+        agent.speed *=  GameManager.Instance.difficultyModifier;
         maxHealth *= GameManager.Instance.difficultyModifier;
         currentHealth = maxHealth;
         GameManager.Instance.enemiesAlive++;

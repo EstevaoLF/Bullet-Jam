@@ -57,6 +57,10 @@ public class SpawnManager : MonoBehaviour
         {
             isWaiting = false;
             GameManager.Instance.WaveCompleted();
+            for (int i = 0; i < waves.Length; i++)
+            {
+                waves[i].numberOfEnemiesPerWave++;
+            }
         }
     }
 

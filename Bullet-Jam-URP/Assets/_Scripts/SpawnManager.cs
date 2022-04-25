@@ -84,9 +84,6 @@ public class SpawnManager : MonoBehaviour
             currentwave++;
         }
         countdownTime = timeBetweenWaves;
-        Debug.Log(currentwave + " currentwave");
-        Debug.Log(waves.Length - 1 + " waves");
-
     }
 
     void SpawnEnemy(Wave _wave)

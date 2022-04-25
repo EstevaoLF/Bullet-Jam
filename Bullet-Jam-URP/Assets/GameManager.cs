@@ -52,14 +52,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         playerScore = 0;
-        scoreTxt.text = playerScore.ToString();
+        scoreTxt.text = $"Score: {playerScore.ToString()}";
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     
     public void IncreaseScore(int score)
     {
         playerScore += score;
-        scoreTxt.text = playerScore.ToString();
+        scoreTxt.text = $"Score: {playerScore.ToString()}";
     }
 
     public void IncreaseHealth()

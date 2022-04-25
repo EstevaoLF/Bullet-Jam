@@ -51,8 +51,9 @@ public class SimpleMove : MonoBehaviour
         }
     }
 
-    private void FaceMoveDirectionWhenCasting()
+    public void FaceMoveDirectionWhenCasting()
     {
+        agent.SetDestination(transform.position);
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Physics.Raycast(ray, out hitInfo, Mathf.Infinity, ground);

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
 public class Canon : MonoBehaviour
 {
     [SerializeField]
@@ -28,11 +28,13 @@ public class Canon : MonoBehaviour
     float checkIfPlayerIsNearTime;
     float countDown;
 
+    AudioSource audio;
     private void Start()
     {
         warming.Stop();
         detonate.Stop();
         countDown = checkIfPlayerIsNearTime;
+        audio = GetComponent<AudioSource>();
     }
 
     public void StartAttacking()
@@ -54,6 +56,8 @@ public class Canon : MonoBehaviour
             warming.Play();
 
             yield return timeBetweenAttacks;
+            audio.clip = SoundManager.Instance.canonAudio[Random.Range(0, SoundManager.Instance.canonAudio.Length)];
+            audio.PlayOneShot(audio.clip);
             GameObject ball = Instantiate(ballPrefab, firePoint.position, transform.rotation);
             ball.GetComponent<Rigidbody>().velocity = (firePoint.forward * 50);
             warming.Simulate(0);

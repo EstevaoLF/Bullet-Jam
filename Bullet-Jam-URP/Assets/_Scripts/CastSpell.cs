@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class CastSpell : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CastSpell : MonoBehaviour
     [SerializeField]
     ParticleSystem shieldPs, teleportPs;
 
+    [SerializeField]
+    AudioSource audioSource;
 
     [SerializeField]
     Transform spawnPosition;
@@ -32,13 +35,18 @@ public class CastSpell : MonoBehaviour
     float shieldManaCost = 50;
     float teleportManaCost = 25;
 
-    WaitForSeconds shieldDuration = new WaitForSeconds(3);    
+    WaitForSeconds shieldDuration = new WaitForSeconds(1.5f);
+    WaitForSeconds animationDuration = new WaitForSeconds(0.25f);
+
+    Animator anim;
     
     void Start()
     {
         player = GetComponent<Player>();
         cam = Camera.main;
         move = GetComponent<SimpleMove>();
+        audioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -55,10 +63,14 @@ public class CastSpell : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1) && player.currentMana >= frozenOrbManaCost && !isFrozenOrbOnCooldown)
         {
+            move.FaceMoveDirectionWhenCasting();
+
             GameObject orb = Instantiate(frozenOrb, spawnPosition.position, transform.rotation);
             Vector3 direction = GetMousePosition() - transform.position;
             orb.GetComponent<Rigidbody>().AddForce(direction.normalized * 1000);
             player.currentMana -= frozenOrbManaCost * GameManager.Instance.manaModifier;
+
+            StartCoroutine(CastAnimation());
 
             isFrozenOrbOnCooldown = true;
             FrozenOrbImg.enabled = true;
@@ -66,14 +78,22 @@ public class CastSpell : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && player.currentMana >= fireBallManaCost)
         {
+            move.FaceMoveDirectionWhenCasting();
+
             GameObject ball = Instantiate(fireBall, spawnPosition.position, transform.rotation);
             Vector3 direction = GetMousePosition() - transform.position;
             ball.GetComponent<Rigidbody>().velocity = (direction.normalized * 50);
             player.currentMana -= fireBallManaCost * GameManager.Instance.manaModifier;
+
+            StartCoroutine(CastAnimation());
+
+            audioSource.clip = SoundManager.Instance.fireballAudio[Random.Range(0, SoundManager.Instance.fireballAudio.Length)];
+            audioSource.PlayOneShot(audioSource.clip);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && player.currentMana >= shieldManaCost && !shieldPs.isPlaying)
         {
             StartCoroutine(Shield());
+            StartCoroutine(CastAnimation());
         }
         if (Input.GetKeyDown(KeyCode.Q) && !isHealthOnCooldown)
         {
@@ -141,5 +161,12 @@ public class CastSpell : MonoBehaviour
         yield return shieldDuration;
         shieldPs.gameObject.SetActive(false);
         player.isShielded = false;
+    }
+
+    IEnumerator CastAnimation()
+    {
+        anim.SetBool("isCasting", true);
+        yield return animationDuration;
+        anim.SetBool("isCasting", false);
     }
 }

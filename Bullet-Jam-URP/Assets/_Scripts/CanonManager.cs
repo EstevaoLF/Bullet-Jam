@@ -38,7 +38,7 @@ public class CanonManager : MonoBehaviour
             int random = Random.Range(0, usedCanons.Count - 1);
             usedCanons[random].StartAttacking();
             usedCanons.Remove(usedCanons[random]);
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1.6f);
         }
         yield return new WaitForSeconds(4);
     }
